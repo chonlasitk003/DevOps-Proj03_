@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f7f4">
+    <meta name="description" content="แจ้งซ่อมง่าย ติดตามสะดวก ครบทุกงานดูแลบ้านและอาคาร">
+    <title>FixFlow | แจ้งซ่อมง่าย ดูแลครบ จบในที่เดียว</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #172a36;
+            --muted: #64737b;
+            --teal: #167c74;
+            --teal-dark: #11665f;
+            --mint: #e8f4ef;
+            --orange: #f3a35c;
+            --paper: #f6f7f4;
+            --white: #fff;
+            --line: #e4e9e5;
+            --shadow: 0 24px 70px rgba(27, 55, 59, .10);
+            font-family: "Leelawadee UI", Tahoma, "Noto Sans Thai", sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-size: 16px;
+            line-height: 1.65;
+        }
+        a { color: inherit; text-decoration: none; }
+        button, input, select, textarea { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        .container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+
+        .topbar { padding: 18px 0; }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 800; letter-spacing: -.5px; }
+        .brand-mark {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            place-items: center;
+            border-radius: 13px;
+            color: white;
+            background: var(--teal);
+        }
+        .brand-mark svg { width: 23px; height: 23px; }
+        .brand span span { color: var(--teal); }
+        .nav-links { display: flex; align-items: center; gap: 34px; color: #53636b; font-size: 14px; font-weight: 600; }
+        .nav-links a:hover { color: var(--teal); }
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 48px;
+            padding: 0 21px;
+            border: 0;
+            border-radius: 12px;
+            color: white;
+            background: var(--teal);
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+        }
+        .button:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 9px 22px rgba(22, 124, 116, .2); }
+        .button svg { width: 17px; height: 17px; }
+        .button-outline { border: 1px solid #d5e0dc; color: var(--ink); background: transparent; }
+        .button-outline:hover { color: var(--teal); background: white; }
+        .nav-cta { min-height: 42px; padding: 0 17px; font-size: 14px; }
+
+        .hero { padding: 62px 0 90px; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 64px; }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid #dcebe4;
+            border-radius: 999px;
+            color: var(--teal-dark);
+            background: #edf6f1;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #53a78b; box-shadow: 0 0 0 4px #d8ede3; }
+        h1 { max-width: 610px; margin: 22px 0 16px; font-size: clamp(42px, 5vw, 64px); line-height: 1.17; letter-spacing: -2px; }
+        h1 em { color: var(--teal); font-style: normal; }
+        .hero-copy { max-width: 510px; margin: 0; color: var(--muted); font-size: 18px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+        .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 25px; color: #64737b; font-size: 13px; }
+        .avatar-stack { display: flex; padding-left: 4px; }
+        .avatar {
+            display: grid;
+            width: 29px;
+            height: 29px;
+            margin-left: -5px;
+            place-items: center;
+            border: 2px solid var(--paper);
+            border-radius: 50%;
+            color: #285d56;
+            background: #cce4d9;
+            font-size: 10px;
+            font-weight: 800;
+        }
+        .avatar:nth-child(2) { color: #754d35; background: #f3d9c2; }
+        .avatar:nth-child(3) { color: #515580; background: #d7d9ed; }
+        .avatar:nth-child(4) { color: #77534b; background: #ead4cc; }
+
+        .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
+        .art-halo { position: absolute; width: 370px; height: 370px; border-radius: 50%; background: #e8f1eb; }
+        .art-halo::before, .art-halo::after { position: absolute; content: ""; border: 1px solid #dce8df; border-radius: 50%; }
+        .art-halo::before { inset: -27px; }
+        .art-halo::after { inset: -54px; }
+        .service-card {
+            position: relative;
+            z-index: 1;
+            width: min(370px, 100%);
+            padding: 24px;
+            border: 1px solid rgba(223, 231, 225, .9);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .96);
+            box-shadow: var(--shadow);
+            transform: rotate(-2deg);
+        }
+        .card-top { display: flex; align-items: center; justify-content: space-between; }
+        .card-label { color: #73817f; font-size: 12px; font-weight: 700; }
+        .status-pill { padding: 5px 10px; border-radius: 99px; color: #247962; background: #e8f5ed; font-size: 11px; font-weight: 700; }
+        .repair-title { margin: 15px 0 5px; font-size: 20px; font-weight: 800; }
+        .repair-subtitle { margin: 0; color: #7a8589; font-size: 13px; }
+        .repair-illustration {
+            display: grid;
+            height: 160px;
+            margin: 19px 0;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 17px;
+            background: linear-gradient(140deg, #eaf5ee 0%, #d7eae0 100%);
+        }
+        .repair-illustration svg { width: 176px; height: 145px; }
+        .progress-label { display: flex; justify-content: space-between; color: #64737b; font-size: 12px; }
+        .progress-track { height: 7px; margin-top: 9px; overflow: hidden; border-radius: 10px; background: #edf0ed; }
+        .progress-track span { display: block; width: 67%; height: 100%; border-radius: inherit; background: var(--teal); }
+        .floating-note {
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 13px 16px;
+            border: 1px solid #edf0eb;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 12px 30px rgba(27, 55, 59, .09);
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .floating-note svg { width: 19px; height: 19px; color: var(--teal); }
+        .note-one { top: 45px; right: -9px; }
+        .note-two { bottom: 31px; left: -20px; }
+
+        .trust-strip { padding: 21px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
+        .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+        .trust-title { color: #79858a; font-size: 13px; font-weight: 600; }
+        .trust-item { display: flex; align-items: center; gap: 9px; color: #40545b; font-size: 13px; font-weight: 700; }
+        .trust-item svg { width: 19px; height: 19px; color: var(--teal); }
+
+        section.content-section { padding: 92px 0; }
+        .section-heading { max-width: 620px; margin: 0 auto 43px; text-align: center; }
+        .section-kicker { color: var(--teal); font-size: 13px; font-weight: 800; letter-spacing: .3px; }
+        h2 { margin: 9px 0 11px; font-size: clamp(30px, 3.5vw, 42px); line-height: 1.3; letter-spacing: -1px; }
+        .section-heading p { margin: 0; color: var(--muted); }
+        .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .service-tile { min-height: 190px; padding: 23px 20px; border: 1px solid var(--line); border-radius: 17px; background: white; transition: transform .2s, box-shadow .2s; }
+        .service-tile:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(27, 55, 59, .07); }
+        .service-icon { display: grid; width: 48px; height: 48px; margin-bottom: 17px; place-items: center; border-radius: 15px; color: var(--teal); background: var(--mint); }
+        .service-icon svg { width: 23px; height: 23px; }
+        .service-tile h3 { margin: 0 0 5px; font-size: 17px; }
+        .service-tile p { margin: 0; color: var(--muted); font-size: 13px; }
+
+        .process-section { background: #edf3ee; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+        .step { position: relative; padding: 4px 8px; text-align: center; }
+        .step:not(:last-child)::after { position: absolute; top: 30px; left: calc(50% + 50px); width: calc(100% - 64px); border-top: 1px dashed #b5c9be; content: ""; }
+        .step-number { display: grid; width: 58px; height: 58px; margin: 0 auto 17px; place-items: center; border: 5px solid #dceae1; border-radius: 50%; color: white; background: var(--teal); font-size: 18px; font-weight: 800; }
+        .step h3 { margin: 0 0 7px; font-size: 18px; }
+        .step p { max-width: 265px; margin: 0 auto; color: var(--muted); font-size: 14px; }
+
+        .request-section { padding: 92px 0; }
+        .request-panel { display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; border-radius: 25px; background: #173a3d; box-shadow: var(--shadow); }
+        .request-copy { padding: 48px 43px; color: white; }
+        .request-copy .section-kicker { color: #9cdbc0; }
+        .request-copy h2 { margin-top: 13px; font-size: 36px; }
+        .request-copy > p { max-width: 370px; margin: 0; color: #c1d2cd; }
+        .request-benefits { display: grid; gap: 14px; margin-top: 27px; }
+        .request-benefit { display: flex; align-items: center; gap: 10px; color: #e2eeea; font-size: 14px; }
+        .request-benefit svg { width: 18px; height: 18px; color: #9cdbc0; }
+        .request-form-wrap { padding: 35px; background: white; }
+        .request-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .field { display: grid; gap: 6px; }
+        .field-full { grid-column: 1 / -1; }
+        .field label { color: #43545a; font-size: 13px; font-weight: 700; }
+        .field input, .field select, .field textarea { width: 100%; min-height: 45px; padding: 10px 12px; border: 1px solid #dfe6e2; border-radius: 9px; outline: none; color: var(--ink); background: #fff; }
+        .field textarea { min-height: 82px; resize: vertical; }
+        .field input:focus, .field select:focus, .field textarea:focus { border-color: #69a99b; box-shadow: 0 0 0 3px rgba(22, 124, 116, .1); }
+        .form-note { grid-column: 1 / -1; margin: -2px 0 0; color: #7b878a; font-size: 11px; }
+        .form-submit { grid-column: 1 / -1; justify-self: start; margin-top: 2px; }
+        .form-message { grid-column: 1 / -1; display: none; margin: 0; padding: 11px 13px; border-radius: 9px; color: #805a24; background: #fff5df; font-size: 13px; }
+
+        .footer { padding: 27px 0; border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .footer .brand { font-size: 17px; }
+        .footer .brand-mark { width: 33px; height: 33px; border-radius: 10px; }
+        .footer .brand-mark svg { width: 19px; }
+        .footer p { margin: 0; color: #79858a; font-size: 12px; }
+
+        @media (max-width: 900px) {
+            .hero-grid { gap: 28px; }
+            .hero-art { min-height: 370px; }
+            .art-halo { width: 310px; height: 310px; }
+            .service-card { width: 330px; }
+            .repair-illustration { height: 135px; }
+            .note-one { right: -8px; }
+            .note-two { left: -4px; }
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .request-copy { padding: 38px 28px; }
+            .request-form-wrap { padding: 28px; }
+        }
+        @media (max-width: 680px) {
+            .container { width: min(100% - 36px, 500px); }
+            .topbar { padding: 13px 0; }
+            .nav-links { display: none; }
+            .brand { font-size: 19px; }
+            .nav-cta { min-height: 40px; padding: 0 13px; font-size: 13px; }
+            .hero { padding: 48px 0 57px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 15px; }
+            h1 { margin-top: 18px; font-size: clamp(40px, 11vw, 54px); letter-spacing: -1.6px; }
+            .hero-copy { font-size: 16px; }
+            .hero-art { min-height: 360px; margin-top: 8px; }
+            .art-halo { width: 285px; height: 285px; }
+            .service-card { width: min(330px, 88%); padding: 19px; }
+            .note-one { top: 24px; right: 0; }
+            .note-two { bottom: 12px; left: -2px; }
+            .trust-inner { justify-content: center; flex-wrap: wrap; gap: 13px 22px; }
+            .trust-title { width: 100%; text-align: center; }
+            .trust-item { font-size: 12px; }
+            section.content-section, .request-section { padding: 68px 0; }
+            .section-heading { margin-bottom: 30px; }
+            .service-grid { gap: 11px; }
+            .service-tile { min-height: 174px; padding: 17px 14px; }
+            .service-icon { width: 43px; height: 43px; margin-bottom: 12px; }
+            .service-tile h3 { font-size: 15px; }
+            .service-tile p { font-size: 12px; }
+            .steps { grid-template-columns: 1fr; gap: 27px; }
+            .step:not(:last-child)::after { top: 60px; left: 50%; width: 0; height: 21px; border-top: 0; border-left: 1px dashed #b5c9be; }
+            .request-panel { grid-template-columns: 1fr; }
+            .request-copy { padding: 31px 25px; }
+            .request-copy h2 { font-size: 31px; }
+            .request-form-wrap { padding: 24px 20px; }
+            .request-form { gap: 12px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <nav class="container nav" aria-label="เมนูหลัก">
+            <a class="brand" href="#" aria-label="FixFlow หน้าแรก">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M14.4 6.2a5.2 5.2 0 0 0-6.7 6.7l-4.1 4.2a1.8 1.8 0 0 0 2.5 2.5l4.2-4.1a5.2 5.2 0 0 0 6.7-6.7l-3.1 3.1-3.1-3.1 3.6-2.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span>Fix<span>Flow</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#services">บริการของเรา</a>
+                <a href="#how-it-works">ขั้นตอนการใช้งาน</a>
+                <a href="#request">แจ้งซ่อม</a>
+            </div>
+            <a class="button nav-cta" href="#request">แจ้งซ่อมเลย <span aria-hidden="true">→</span></a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow"><span class="eyebrow-dot"></span> ดูแลทุกปัญหาเรื่องบ้านและอาคาร</span>
+                    <h1>เรื่องซ่อม<br>ให้เป็นเรื่อง<em>ง่าย</em></h1>
+                    <p class="hero-copy">แจ้งปัญหาได้ในไม่กี่ขั้นตอน พร้อมติดตามสถานะได้สบายใจ ให้ทุกเรื่องจุกจิกมีคนช่วยดูแล</p>
+                    <div class="hero-actions">
+                        <a class="button" href="#request">เริ่มแจ้งซ่อม <span aria-hidden="true">→</span></a>
+                        <a class="button button-outline" href="#how-it-works">ดูขั้นตอนการทำงาน</a>
+                    </div>
+                    <div class="hero-note">
+                        <span class="avatar-stack" aria-hidden="true"><span class="avatar">ช</span><span class="avatar">ม</span><span class="avatar">ก</span><span class="avatar">น</span></span>
+                        <span>แจ้งง่าย ติดตามสะดวก ไม่ต้องโทรตาม</span>
+                    </div>
+                </div>
+                <div class="hero-art" aria-label="ภาพตัวอย่างการติดตามงานซ่อม">
+                    <div class="art-halo" aria-hidden="true"></div>
+                    <div class="service-card">
+                        <div class="card-top"><span class="card-label">รายการแจ้งซ่อม</span><span class="status-pill">กำลังดำเนินการ</span></div>
+                        <p class="repair-title">ตรวจเช็กระบบประปา</p>
+                        <p class="repair-subtitle">บ้านเลขที่ 24 · วันนี้ 10:30 น.</p>
+                        <div class="repair-illustration" aria-hidden="true">
+                            <svg viewBox="0 0 190 150" fill="none">
+                                <path d="M34 119h122" stroke="#90B8A2" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M51 119V74l43-30 44 30v45" fill="#F8FBF7" stroke="#679B80" stroke-width="4" stroke-linejoin="round"/>
+                                <path d="M84 119V91h25v28" fill="#D6E8DC" stroke="#679B80" stroke-width="3"/>
+                                <path d="M63 81h17v16H63zM117 81h11v13h-11z" fill="#DCEFE5"/>
+                                <path d="M133 100v11h14v-11M140 96v-9h9" stroke="#4F8E78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M149 88c0 3-4 3-4 0 0-2 2-4 2-4s2 2 2 4Z" fill="#62B4AA"/>
+                                <circle cx="151" cy="51" r="15" fill="#F3B270"/>
+                                <path d="m144 51 5 5 10-11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="m49 71 45-31 45 31" stroke="#4F8E78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="progress-label"><span>อัปเดตสถานะงาน</span><strong>2 จาก 3 ขั้นตอน</strong></div>
+                        <div class="progress-track"><span></span></div>
+                    </div>
+                    <div class="floating-note note-one">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>รับเรื่องเรียบร้อย</span>
+                    </div>
+                    <div class="floating-note note-two">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2m5-2a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>ติดตามได้ทุกขั้นตอน</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="trust-strip">
+            <div class="container trust-inner">
+                <span class="trust-title">ดูแลเรื่องสำคัญให้คุณ</span>
+                <span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ข้อมูลแจ้งซ่อมเป็นระบบ</span>
+                <span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2m5-2a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>ติดตามสถานะสะดวก</span>
+                <span class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M4 13h4l3 7 5-16 3 9h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ครอบคลุมงานซ่อมหลากหลาย</span>
+            </div>
+        </div>
+
+        <section class="content-section" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">บริการของเรา</span>
+                    <h2>ปัญหาแบบไหน เราก็พร้อมดูแล</h2>
+                    <p>เลือกหมวดงานที่ต้องการแจ้ง เพื่อให้การดูแลเป็นเรื่องง่ายและตรงจุด</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-tile">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M7 12V6h10v6m-8 0v7m6-7v7M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <h3>งานประปา</h3><p>ท่อรั่ว ก๊อกน้ำ หรือระบบน้ำ</p>
+                    </article>
+                    <article class="service-tile">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6m-5 3h4m-2-19a7 7 0 0 0-4 12.7c.5.4 1 1.1 1 1.8h6c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <h3>งานไฟฟ้า</h3><p>ไฟดับ สวิตช์ หรือระบบไฟ</p>
+                    </article>
+                    <article class="service-tile">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11 12 4l9 7M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <h3>งานอาคาร</h3><p>ประตู ผนัง หรือส่วนกลาง</p>
+                    </article>
+                    <article class="service-tile">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 13a8 8 0 0 1 16 0v5h-5v-6h5M4 12v6h5v-6H4Zm5 8h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <h3>งานอื่น ๆ</h3><p>แจ้งรายละเอียดเพิ่มเติมได้</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section process-section" id="how-it-works">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">ขั้นตอนการใช้งาน</span>
+                    <h2>แจ้งซ่อมง่าย ๆ ใน 3 ขั้นตอน</h2>
+                    <p>บอกปัญหาที่พบ แล้วติดตามความคืบหน้าได้ในที่เดียว</p>
+                </div>
+                <div class="steps">
+                    <article class="step"><span class="step-number">1</span><h3>แจ้งรายละเอียด</h3><p>เลือกหมวดงาน ระบุสถานที่ และเล่าอาการที่พบ</p></article>
+                    <article class="step"><span class="step-number">2</span><h3>รอการประสานงาน</h3><p>ทีมงานตรวจสอบข้อมูลและประสานการเข้าดูแล</p></article>
+                    <article class="step"><span class="step-number">3</span><h3>ติดตามจนเรียบร้อย</h3><p>ตรวจสอบความคืบหน้าและรับทราบผลการดำเนินงาน</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="request-section" id="request">
+            <div class="container">
+                <div class="request-panel">
+                    <div class="request-copy">
+                        <span class="section-kicker">เริ่มต้นได้เลย</span>
+                        <h2>มีอะไรให้ช่วยซ่อมไหม?</h2>
+                        <p>กรอกรายละเอียดเบื้องต้น แล้วเราจะช่วยให้การแจ้งซ่อมเป็นเรื่องง่ายขึ้น</p>
+                        <div class="request-benefits">
+                            <span class="request-benefit"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>แจ้งปัญหาได้สะดวกทุกที่</span>
+                            <span class="request-benefit"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ระบุรายละเอียดได้ครบถ้วน</span>
+                            <span class="request-benefit"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ออกแบบมาเพื่อให้ติดตามงานง่าย</span>
+                        </div>
+                    </div>
+                    <div class="request-form-wrap">
+                        <form class="request-form" id="repair-form">
+                            <div class="field"><label for="name">ชื่อผู้แจ้ง</label><input id="name" name="name" autocomplete="name" placeholder="ชื่อของคุณ" required></div>
+                            <div class="field"><label for="phone">เบอร์ติดต่อ</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="08X-XXX-XXXX" required></div>
+                            <div class="field"><label for="category">หมวดงาน</label><select id="category" name="category" required><option value="" selected disabled>เลือกหมวดงาน</option><option>งานประปา</option><option>งานไฟฟ้า</option><option>งานอาคาร</option><option>งานอื่น ๆ</option></select></div>
+                            <div class="field"><label for="location">สถานที่</label><input id="location" name="location" placeholder="อาคาร / ชั้น / ห้อง" required></div>
+                            <div class="field field-full"><label for="details">รายละเอียดปัญหา</label><textarea id="details" name="details" placeholder="เล่าอาการหรือสิ่งที่ต้องการให้ช่วยดูแล" required></textarea></div>
+                            <p class="form-note">ตัวอย่างแบบฟอร์มนี้ยังไม่เชื่อมต่อระบบรับแจ้งซ่อม และจะไม่ส่งหรือบันทึกข้อมูลของคุณ</p>
+                            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+                            <button class="button form-submit" type="submit">ตรวจสอบแบบฟอร์ม <span aria-hidden="true">→</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a class="brand" href="#" aria-label="FixFlow หน้าแรก">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M14.4 6.2a5.2 5.2 0 0 0-6.7 6.7l-4.1 4.2a1.8 1.8 0 0 0 2.5 2.5l4.2-4.1a5.2 5.2 0 0 0 6.7-6.7l-3.1 3.1-3.1-3.1 3.6-2.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span>Fix<span>Flow</span></span>
+            </a>
+            <p>© 2026 FixFlow · หน้าเว็บตัวอย่างสำหรับบริการแจ้งซ่อม</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("repair-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (!this.reportValidity()) return;
+
+            const message = document.getElementById("form-message");
+            message.textContent = "กรอกข้อมูลครบแล้ว — นี่เป็นเพียงตัวอย่างหน้าเว็บ ข้อมูลยังไม่ได้ถูกส่งหรือบันทึก";
+            message.style.display = "block";
+        });
+    </script>
+</body>
+</html>
