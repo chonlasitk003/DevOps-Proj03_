@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f6f7f4">
+    <meta name="theme-color" content="#f7f6f5">
     <meta name="description" content="แจ้งซ่อมง่าย ติดตามสะดวก ครบทุกงานดูแลบ้านและอาคาร">
     <title>FixFlow | แจ้งซ่อมง่าย ดูแลครบ จบในที่เดียว</title>
     <style>
         :root {
             color-scheme: light;
-            --ink: #172a36;
-            --muted: #64737b;
-            --teal: #167c74;
-            --teal-dark: #11665f;
-            --mint: #e8f4ef;
-            --orange: #f3a35c;
-            --paper: #f6f7f4;
+            --ink: #191919;
+            --muted: #6d6868;
+            --teal: #c62828;
+            --teal-dark: #a51f25;
+            --mint: #fff0f0;
+            --orange: #e54a4a;
+            --paper: #f7f6f5;
             --white: #fff;
-            --line: #e4e9e5;
-            --shadow: 0 24px 70px rgba(27, 55, 59, .10);
+            --line: #e9e4e4;
+            --shadow: 0 24px 70px rgba(30, 15, 15, .10);
             font-family: "Leelawadee UI", Tahoma, "Noto Sans Thai", sans-serif;
         }
 
@@ -72,9 +72,9 @@
             cursor: pointer;
             transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
         }
-        .button:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 9px 22px rgba(22, 124, 116, .2); }
+        .button:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 9px 22px rgba(198, 40, 40, .2); }
         .button svg { width: 17px; height: 17px; }
-        .button-outline { border: 1px solid #d5e0dc; color: var(--ink); background: transparent; }
+        .button-outline { border: 1px solid #e4dada; color: var(--ink); background: transparent; }
         .button-outline:hover { color: var(--teal); background: white; }
         .nav-cta { min-height: 42px; padding: 0 17px; font-size: 14px; }
 
@@ -85,14 +85,14 @@
             align-items: center;
             gap: 8px;
             padding: 7px 12px;
-            border: 1px solid #dcebe4;
+            border: 1px solid #f0dada;
             border-radius: 999px;
             color: var(--teal-dark);
-            background: #edf6f1;
+            background: #fff3f3;
             font-size: 13px;
             font-weight: 700;
         }
-        .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #53a78b; box-shadow: 0 0 0 4px #d8ede3; }
+        .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #d34a4a; box-shadow: 0 0 0 4px #f8dddd; }
         h1 { max-width: 610px; margin: 22px 0 16px; font-size: clamp(42px, 5vw, 64px); line-height: 1.17; letter-spacing: -2px; }
         h1 em { color: var(--teal); font-style: normal; }
         .hero-copy { max-width: 510px; margin: 0; color: var(--muted); font-size: 18px; }
@@ -107,18 +107,18 @@
             place-items: center;
             border: 2px solid var(--paper);
             border-radius: 50%;
-            color: #285d56;
-            background: #cce4d9;
+            color: #842626;
+            background: #f1d2d2;
             font-size: 10px;
             font-weight: 800;
         }
-        .avatar:nth-child(2) { color: #754d35; background: #f3d9c2; }
-        .avatar:nth-child(3) { color: #515580; background: #d7d9ed; }
-        .avatar:nth-child(4) { color: #77534b; background: #ead4cc; }
+        .avatar:nth-child(2) { color: #282828; background: #dedada; }
+        .avatar:nth-child(3) { color: #842626; background: #f5dede; }
+        .avatar:nth-child(4) { color: #383333; background: #e9e2e2; }
 
         .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
-        .art-halo { position: absolute; width: 370px; height: 370px; border-radius: 50%; background: #e8f1eb; }
-        .art-halo::before, .art-halo::after { position: absolute; content: ""; border: 1px solid #dce8df; border-radius: 50%; }
+        .art-halo { position: absolute; width: 370px; height: 370px; border-radius: 50%; background: #f4e8e8; }
+        .art-halo::before, .art-halo::after { position: absolute; content: ""; border: 1px solid #eadada; border-radius: 50%; }
         .art-halo::before { inset: -27px; }
         .art-halo::after { inset: -54px; }
         .service-card {
@@ -126,15 +126,15 @@
             z-index: 1;
             width: min(370px, 100%);
             padding: 24px;
-            border: 1px solid rgba(223, 231, 225, .9);
+            border: 1px solid rgba(233, 224, 224, .9);
             border-radius: 24px;
             background: rgba(255, 255, 255, .96);
             box-shadow: var(--shadow);
             transform: rotate(-2deg);
         }
         .card-top { display: flex; align-items: center; justify-content: space-between; }
-        .card-label { color: #73817f; font-size: 12px; font-weight: 700; }
-        .status-pill { padding: 5px 10px; border-radius: 99px; color: #247962; background: #e8f5ed; font-size: 11px; font-weight: 700; }
+        .card-label { color: #777071; font-size: 12px; font-weight: 700; }
+        .status-pill { padding: 5px 10px; border-radius: 99px; color: #a51f25; background: #fff0f0; font-size: 11px; font-weight: 700; }
         .repair-title { margin: 15px 0 5px; font-size: 20px; font-weight: 800; }
         .repair-subtitle { margin: 0; color: #7a8589; font-size: 13px; }
         .repair-illustration {
@@ -144,11 +144,11 @@
             place-items: center;
             overflow: hidden;
             border-radius: 17px;
-            background: linear-gradient(140deg, #eaf5ee 0%, #d7eae0 100%);
+            background: linear-gradient(140deg, #fff4f4 0%, #f0dada 100%);
         }
         .repair-illustration svg { width: 176px; height: 145px; }
         .progress-label { display: flex; justify-content: space-between; color: #64737b; font-size: 12px; }
-        .progress-track { height: 7px; margin-top: 9px; overflow: hidden; border-radius: 10px; background: #edf0ed; }
+        .progress-track { height: 7px; margin-top: 9px; overflow: hidden; border-radius: 10px; background: #f0eded; }
         .progress-track span { display: block; width: 67%; height: 100%; border-radius: inherit; background: var(--teal); }
         .floating-note {
             position: absolute;
@@ -157,10 +157,10 @@
             align-items: center;
             gap: 11px;
             padding: 13px 16px;
-            border: 1px solid #edf0eb;
+            border: 1px solid #eee8e8;
             border-radius: 15px;
             background: white;
-            box-shadow: 0 12px 30px rgba(27, 55, 59, .09);
+            box-shadow: 0 12px 30px rgba(30, 15, 15, .09);
             font-size: 12px;
             font-weight: 700;
         }
@@ -171,7 +171,7 @@
         .trust-strip { padding: 21px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
         .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
         .trust-title { color: #79858a; font-size: 13px; font-weight: 600; }
-        .trust-item { display: flex; align-items: center; gap: 9px; color: #40545b; font-size: 13px; font-weight: 700; }
+        .trust-item { display: flex; align-items: center; gap: 9px; color: #3b3535; font-size: 13px; font-weight: 700; }
         .trust-item svg { width: 19px; height: 19px; color: var(--teal); }
 
         section.content-section { padding: 92px 0; }
@@ -181,40 +181,40 @@
         .section-heading p { margin: 0; color: var(--muted); }
         .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
         .service-tile { min-height: 190px; padding: 23px 20px; border: 1px solid var(--line); border-radius: 17px; background: white; transition: transform .2s, box-shadow .2s; }
-        .service-tile:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(27, 55, 59, .07); }
+        .service-tile:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(30, 15, 15, .07); }
         .service-icon { display: grid; width: 48px; height: 48px; margin-bottom: 17px; place-items: center; border-radius: 15px; color: var(--teal); background: var(--mint); }
         .service-icon svg { width: 23px; height: 23px; }
         .service-tile h3 { margin: 0 0 5px; font-size: 17px; }
         .service-tile p { margin: 0; color: var(--muted); font-size: 13px; }
 
-        .process-section { background: #edf3ee; }
+        .process-section { background: #f1eded; }
         .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
         .step { position: relative; padding: 4px 8px; text-align: center; }
-        .step:not(:last-child)::after { position: absolute; top: 30px; left: calc(50% + 50px); width: calc(100% - 64px); border-top: 1px dashed #b5c9be; content: ""; }
-        .step-number { display: grid; width: 58px; height: 58px; margin: 0 auto 17px; place-items: center; border: 5px solid #dceae1; border-radius: 50%; color: white; background: var(--teal); font-size: 18px; font-weight: 800; }
+        .step:not(:last-child)::after { position: absolute; top: 30px; left: calc(50% + 50px); width: calc(100% - 64px); border-top: 1px dashed #ccbcbc; content: ""; }
+        .step-number { display: grid; width: 58px; height: 58px; margin: 0 auto 17px; place-items: center; border: 5px solid #f0dede; border-radius: 50%; color: white; background: var(--teal); font-size: 18px; font-weight: 800; }
         .step h3 { margin: 0 0 7px; font-size: 18px; }
         .step p { max-width: 265px; margin: 0 auto; color: var(--muted); font-size: 14px; }
 
         .request-section { padding: 92px 0; }
-        .request-panel { display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; border-radius: 25px; background: #173a3d; box-shadow: var(--shadow); }
+        .request-panel { display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; border-radius: 25px; background: #191919; box-shadow: var(--shadow); }
         .request-copy { padding: 48px 43px; color: white; }
-        .request-copy .section-kicker { color: #9cdbc0; }
+        .request-copy .section-kicker { color: #ff7777; }
         .request-copy h2 { margin-top: 13px; font-size: 36px; }
-        .request-copy > p { max-width: 370px; margin: 0; color: #c1d2cd; }
+        .request-copy > p { max-width: 370px; margin: 0; color: #d0caca; }
         .request-benefits { display: grid; gap: 14px; margin-top: 27px; }
-        .request-benefit { display: flex; align-items: center; gap: 10px; color: #e2eeea; font-size: 14px; }
-        .request-benefit svg { width: 18px; height: 18px; color: #9cdbc0; }
+        .request-benefit { display: flex; align-items: center; gap: 10px; color: #eee8e8; font-size: 14px; }
+        .request-benefit svg { width: 18px; height: 18px; color: #ff7777; }
         .request-form-wrap { padding: 35px; background: white; }
         .request-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .field { display: grid; gap: 6px; }
         .field-full { grid-column: 1 / -1; }
-        .field label { color: #43545a; font-size: 13px; font-weight: 700; }
-        .field input, .field select, .field textarea { width: 100%; min-height: 45px; padding: 10px 12px; border: 1px solid #dfe6e2; border-radius: 9px; outline: none; color: var(--ink); background: #fff; }
+        .field label { color: #403939; font-size: 13px; font-weight: 700; }
+        .field input, .field select, .field textarea { width: 100%; min-height: 45px; padding: 10px 12px; border: 1px solid #e5dddd; border-radius: 9px; outline: none; color: var(--ink); background: #fff; }
         .field textarea { min-height: 82px; resize: vertical; }
-        .field input:focus, .field select:focus, .field textarea:focus { border-color: #69a99b; box-shadow: 0 0 0 3px rgba(22, 124, 116, .1); }
+        .field input:focus, .field select:focus, .field textarea:focus { border-color: #d66b6b; box-shadow: 0 0 0 3px rgba(198, 40, 40, .1); }
         .form-note { grid-column: 1 / -1; margin: -2px 0 0; color: #7b878a; font-size: 11px; }
         .form-submit { grid-column: 1 / -1; justify-self: start; margin-top: 2px; }
-        .form-message { grid-column: 1 / -1; display: none; margin: 0; padding: 11px 13px; border-radius: 9px; color: #805a24; background: #fff5df; font-size: 13px; }
+        .form-message { grid-column: 1 / -1; display: none; margin: 0; padding: 11px 13px; border-radius: 9px; color: #8b2727; background: #fff0f0; font-size: 13px; }
 
         .footer { padding: 27px 0; border-top: 1px solid var(--line); }
         .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
@@ -261,7 +261,7 @@
             .service-tile h3 { font-size: 15px; }
             .service-tile p { font-size: 12px; }
             .steps { grid-template-columns: 1fr; gap: 27px; }
-            .step:not(:last-child)::after { top: 60px; left: 50%; width: 0; height: 21px; border-top: 0; border-left: 1px dashed #b5c9be; }
+            .step:not(:last-child)::after { top: 60px; left: 50%; width: 0; height: 21px; border-top: 0; border-left: 1px dashed #ccbcbc; }
             .request-panel { grid-template-columns: 1fr; }
             .request-copy { padding: 31px 25px; }
             .request-copy h2 { font-size: 31px; }
@@ -317,15 +317,15 @@
                         <p class="repair-subtitle">บ้านเลขที่ 24 · วันนี้ 10:30 น.</p>
                         <div class="repair-illustration" aria-hidden="true">
                             <svg viewBox="0 0 190 150" fill="none">
-                                <path d="M34 119h122" stroke="#90B8A2" stroke-width="5" stroke-linecap="round"/>
-                                <path d="M51 119V74l43-30 44 30v45" fill="#F8FBF7" stroke="#679B80" stroke-width="4" stroke-linejoin="round"/>
-                                <path d="M84 119V91h25v28" fill="#D6E8DC" stroke="#679B80" stroke-width="3"/>
-                                <path d="M63 81h17v16H63zM117 81h11v13h-11z" fill="#DCEFE5"/>
-                                <path d="M133 100v11h14v-11M140 96v-9h9" stroke="#4F8E78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M149 88c0 3-4 3-4 0 0-2 2-4 2-4s2 2 2 4Z" fill="#62B4AA"/>
-                                <circle cx="151" cy="51" r="15" fill="#F3B270"/>
+                                <path d="M34 119h122" stroke="#C99A9A" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M51 119V74l43-30 44 30v45" fill="#FFFAFA" stroke="#B95757" stroke-width="4" stroke-linejoin="round"/>
+                                <path d="M84 119V91h25v28" fill="#F0DADA" stroke="#B95757" stroke-width="3"/>
+                                <path d="M63 81h17v16H63zM117 81h11v13h-11z" fill="#F5E4E4"/>
+                                <path d="M133 100v11h14v-11M140 96v-9h9" stroke="#A33A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M149 88c0 3-4 3-4 0 0-2 2-4 2-4s2 2 2 4Z" fill="#D66B6B"/>
+                                <circle cx="151" cy="51" r="15" fill="#E54A4A"/>
                                 <path d="m144 51 5 5 10-11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="m49 71 45-31 45 31" stroke="#4F8E78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="m49 71 45-31 45 31" stroke="#A33A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
                         <div class="progress-label"><span>อัปเดตสถานะงาน</span><strong>2 จาก 3 ขั้นตอน</strong></div>
